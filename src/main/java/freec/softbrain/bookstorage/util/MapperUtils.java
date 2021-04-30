@@ -4,6 +4,7 @@ import freec.softbrain.bookstorage.model.dto.AuthorDto;
 import freec.softbrain.bookstorage.model.dto.BookDto;
 import freec.softbrain.bookstorage.model.entity.Author;
 import freec.softbrain.bookstorage.model.entity.Book;
+import freec.softbrain.bookstorage.model.response.AuthorResponse;
 import freec.softbrain.bookstorage.model.response.BookResponse;
 
 import java.util.List;
@@ -34,11 +35,21 @@ public class MapperUtils {
         return response;
     }
 
-    public static BookResponse map(List<Book> entities) {
+    public static BookResponse mapBookResponse(List<Book> entities) {
         BookResponse response = new BookResponse();
-        for (Book entity : entities) {
-            response.add(entity);
-        }
+        response.add(entities);
+        return response;
+    }
+
+    public static AuthorResponse map(Author entity) {
+        AuthorResponse response = new AuthorResponse();
+        response.add(entity);
+        return response;
+    }
+
+    public static AuthorResponse mapAuthorResponse(List<Author> entities) {
+        AuthorResponse response = new AuthorResponse();
+        response.add(entities);
         return response;
     }
 }

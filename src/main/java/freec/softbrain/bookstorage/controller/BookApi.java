@@ -41,10 +41,10 @@ public class BookApi {
             @RequestParam(value = "authorName", required = false) String authorName) {
 
         if (authorName != null) {
-            return new ResponseEntity<>(MapperUtils.map(bookService.findByAuthorName(authorName)), HttpStatus.OK);
+            return new ResponseEntity<>(MapperUtils.mapBookResponse(bookService.findByAuthorName(authorName)), HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(MapperUtils.map(bookService.findAll(pageNo, pageSize, sortBy)), HttpStatus.OK);
+        return new ResponseEntity<>(MapperUtils.mapBookResponse(bookService.findAll(pageNo, pageSize, sortBy)), HttpStatus.OK);
     }
 
 
@@ -55,8 +55,8 @@ public class BookApi {
         if (author == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "not_found", new Throwable("The Author with id=" + dto.getAuthorId() + " is not exist."));
         }
-        Book newBook = MapperUtils.map(dto, author);
-        MapperUtils.map(bookService.save(newBook));
+
+        bookService.save(MapperUtils.map(dto, author));
 
         return new ResponseEntity<>("", HttpStatus.CREATED);
     }

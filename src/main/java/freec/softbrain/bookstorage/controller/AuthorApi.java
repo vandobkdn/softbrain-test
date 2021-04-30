@@ -22,12 +22,12 @@ public class AuthorApi {
         if (author == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "not_found", new Throwable("The author with id=" + id + " is not exist."));
         }
-        return new ResponseEntity<>(author, HttpStatus.OK);
+        return new ResponseEntity<>(MapperUtils.map(author), HttpStatus.OK);
     }
 
     @GetMapping()
     public ResponseEntity<?> findAll() {
-        return new ResponseEntity<>(authorService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(MapperUtils.mapAuthorResponse(authorService.findAll()), HttpStatus.OK);
     }
 
     @PostMapping()

@@ -15,4 +15,8 @@ public class BookResponse {
     public void add(Book book) {
         data.add(book);
     }
+
+    public void add(List<Book> books) {
+        data.addAll(books);
+    }
 }
