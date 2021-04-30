@@ -1,6 +1,5 @@
 package freec.softbrain.bookstorage.service.impl;
 
-import com.google.common.collect.Lists;
 import freec.softbrain.bookstorage.model.entity.Author;
 import freec.softbrain.bookstorage.model.entity.Book;
 import freec.softbrain.bookstorage.repository.AuthorRepository;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -21,7 +21,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public List<Author> findAll() {
-        return Lists.newArrayList(repository.findAll());
+        return repository.findAll().stream().filter(a -> a.getRemoval() != Boolean.TRUE).collect(Collectors.toList());
     }
 
     @Override
